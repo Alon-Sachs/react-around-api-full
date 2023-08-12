@@ -42,6 +42,9 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
+app.use(cors());
+app.options('*', cors());
+
 app.use(limiter);
 app.use(helmet());
 app.use(express.json());
@@ -53,8 +56,6 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(cors());
-app.options('*', cors());
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
