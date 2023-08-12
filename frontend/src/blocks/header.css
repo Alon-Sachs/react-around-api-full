@@ -1,0 +1,110 @@
+.header {
+    display: flex;
+    margin: 36px 0;
+    border-bottom: 1px rgba(84, 84, 84, 0.7) solid;
+    padding: 0 0 41px;
+    align-items: center;
+}
+
+.header__logo {
+    max-width: 173px;
+    margin-right: auto;
+}
+
+.header__button {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity linear 0.2s;
+}
+
+.header__button:hover {
+    opacity: 0.8;
+}
+
+.header__button-signout {
+    color: #A9A9A9;
+    margin-left: 24px;
+}
+
+.header__email {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+}
+
+.header__menu-btn {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        margin: 28px 0 38px;
+        padding-bottom: 32px;
+    }
+
+    .header-mobile {
+        margin: 28px 0 38px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "menu menu"
+            "logo menu-btn";
+        padding-bottom: 32px;
+    }
+
+    .header__logo {
+        max-width: 126px;
+        grid-area: logo;
+        margin-left: 30px;
+    }
+
+    .header__button {
+        margin-right: 30px;
+    }
+
+    .header__details {
+        display: flex;
+    }
+
+    .header__details-mobile {
+        display: none;
+    }
+
+    .header__details-mobile_active {
+        display: flex;
+        flex-direction: column;
+        grid-area: menu;
+        justify-self: center;
+        align-items: center;
+        gap: 18px;
+        padding: 4px 0 40px;
+        border-bottom: 1px rgba(84, 84, 84, 0.7) solid;
+        width: 100%;
+        margin-bottom: 27px;
+    }
+
+    .header__menu-btn {
+        display: block;
+        height: 24px;
+        width: 24px;
+        background-image: url(../images/header/header__menu-open.svg);
+        background-color: transparent;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        grid-area: menu-btn;
+        justify-self: right;
+        margin-right: 30px;
+    }
+
+    .header__menu-btn_active {
+        background-image: url(../images/header/header__menu-close.svg);
+    }
+}

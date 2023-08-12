@@ -1,0 +1,101 @@
+
+.card-popup__container {
+    position: relative;
+    margin: 40px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 36px;
+    width: 100%;
+    max-width: 358px;
+}
+
+.card-popup__close-btn {
+    position: absolute;
+    right: -45px;
+    top: -45px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../images/popup/close_icon.svg);
+    cursor: pointer;
+    transition: opacity linear 0.3s;
+    border: none;
+}
+
+.card-popup__close-btn:hover {
+    opacity: 0.6;
+}
+
+.card-popup__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-popup__title {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29px;
+    text-align: left;
+    color: black;
+    margin: 0 0 41px;
+}
+
+.card-popup__field-submit {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 2px;
+    padding: 15px 150px 15px;
+    margin-top: 31px;
+    transition: opacity linear 0.3s;
+    cursor: pointer;
+    border: none;
+}
+
+.card-popup__field-submit:hover {
+    opacity: 0.8;
+}
+
+
+.card-popup__field {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    margin-top: 30px;
+    padding: 0 0 13px 0;
+    background-color: transparent;
+    border-width: 0 0 1px 0;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.card-popup__field:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 768px) {
+    .card-popup__container {
+        padding: 25px 22px;
+        max-width: 238px;
+        margin: 0;
+    }
+
+    .card-popup__field-submit {
+        padding: 14px 100px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .card-popup__close-container {
+        margin: 0 0 15px;
+        padding: 0;
+        width: 100%;
+        max-width: 282px;
+    }
+}

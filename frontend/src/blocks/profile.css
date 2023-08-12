@@ -1,0 +1,168 @@
+.profile {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 46px;
+}
+
+.profile__img {
+    border-radius: 100%;
+    max-width: 120px;
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+}
+
+.profile__img-container {
+    position: relative;
+}
+
+.profile__img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100%;
+    width: 120px;
+    height: 120px;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
+}
+
+.profile__img-overlay:hover {
+    opacity: 1;
+}
+
+.profile__img-overlay img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 26px;
+}
+
+
+.profile__edit-btn {
+    max-width: 24px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.profile__info {
+    display: grid;
+    grid-template-columns: 1fr 24px;
+    grid-template-rows: 1fr auto;
+    gap: 18px 16px;
+    margin-right: auto;
+    max-width: 550px;
+    align-items: flex-end;
+}
+
+.profile__info-name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 48px;
+    margin: 0;
+}
+
+.profile__info-btn {
+    width: 26px;
+    height: 26px;
+    margin-bottom: 7px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-size: 50%;
+    background-image: url(../images/profile/profile__edit-btn.svg);
+    cursor: pointer;
+    transition: opacity linear 0.3s;
+    border: 1px #FFFFFF solid;
+}
+
+.profile__info-job {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    flex-basis: 50%;
+    max-width: 250px;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+.profile__form {
+    text-align: right;
+}
+
+.profile__add-btn {
+    min-width: 150px;
+    height: 50px;
+    background-color: transparent;
+    background-size: 15%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../images/profile/profile__btn-icon.svg);
+    border: white 2px solid;
+    cursor: pointer;
+    transition: opacity linear 0.3s;
+    border-radius: 2px;
+}
+
+.profile__add-btn:hover {
+    opacity: 0.6;
+}
+
+.profile__info-btn:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+
+    .profile {
+        flex-direction: column;
+        margin-bottom: 36px;
+    }
+
+    .profile__info {
+        max-width: 100%;
+        align-items: center;
+        text-align: center;
+        margin-right: 0;
+    }
+
+    .profile__form {
+        width: 100%;
+        text-align: center;
+    }
+
+    .profile__add-btn {
+        width: 100%;
+        max-width: 282px;
+        background-size: 5%;
+    }
+
+    .profile__info-name {
+        font-size: 22px;
+        line-height: 27px;
+        text-align: center;
+    }
+
+    .profile__info-job {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .profile__info-btn {
+        width: 20px;
+        height: 20px;
+        margin-bottom: 0;
+    }
+}

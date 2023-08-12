@@ -1,0 +1,33 @@
+.tooltip{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 24px 0;
+    gap: 32px;
+}
+.tooltip__text {
+    color: #000;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: normal;
+    margin: 0;
+}
+
+.tooltip__image{
+    max-width: 120px;
+}
+
+
+@media screen and (max-width: 500px) {
+    .tooltip{
+        gap: 40px;
+    }
+
+    .tooltip__text {
+        width: 244px;
+        font-size: 20px;
+        line-height: normal;
+    }
+}

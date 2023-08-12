@@ -1,0 +1,66 @@
+const Card = require('../models/card');
+const NotFoundError = require('../errors/not-found-error');
+const BadRequestError = require('../errors/bad-request-error');
+
+module.exports.getAllCards = (req, res) => {
+  Card.find({})
+    .then((cards) => res.send({ data: cards }))
+    .catch(next);
+};
+
+module.exports.createCard = (req, res) => {
+  const { name, link } = req.body;
+  Card.create({ name, link, owner: req.user._id })
+    .orFail(() => {
+      throw new BadRequestError('Validation Error');
+    })
+    .then((card) => res.send({ data: card }))
+    .catch(next);
+};
+
+module.exports.deleteCard = (req, res) => {
+  const { cardId } = req.params;
+  Card.isSelfCard(res.user._id, cardId)
+    .then((res) => {
+      return Card.findByIdAndDelete(cardId)
+    })
+    .orFail(() => {
+      throw new NotFoundError('There is no card with the requested id');
+    })
+    .then((card) => res.send({ data: card }))
+    .catch(next);
+};
+
+module.exports.likeCard = (req, res) => {
+  const { cardId } = req.params;
+  Card.isSelfCard(res.user._id, cardId)
+    .then((res) => {
+      Card.findByIdAndUpdate(
+        cardId,
+        { $addToSet: { likes: req.user._id } },
+        { new: true },
+      )
+    })
+    .orFail(() => {
+      throw new NotFoundError('There is no card with the requested id');
+    })
+    .then((card) => res.send({ data: card }))
+    .catch(next);
+};
+
+module.exports.dislikeCard = (req, res) => {
+  const { cardId } = req.params;
+  Card.isSelfCard(res.user._id, cardId)
+    .then((res) => {
+      Card.findByIdAndUpdate(
+        cardId,
+        { $pull: { likes: req.user._id } },
+        { new: true },
+      )
+    })
+    .orFail(() => {
+      throw new NotFoundError('There is no card with the requested id');
+    })
+    .then((card) => res.send({ data: card }))
+    .catch(next);
+}

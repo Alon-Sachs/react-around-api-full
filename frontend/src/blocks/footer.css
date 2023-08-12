@@ -1,0 +1,26 @@
+.footer {
+    margin-bottom: 60px;
+    margin-top: 68px;
+}
+
+.footer__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: left;
+    color: #545454;
+}
+
+@media screen and (max-width: 768px) {
+    .footer__title {
+        font-size: 14px;
+        line-height: 17px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer {
+        margin: 50px 19px 36px;
+    }
+}

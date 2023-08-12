@@ -1,0 +1,39 @@
+
+.img-popup__container {
+    position: relative;
+    border-radius: 10px;
+}
+
+.img-popup__img{
+    max-width: 75vw;
+    max-height: 75vh;
+}
+
+.img-popup__close-btn:hover {
+    opacity: 0.6;
+}
+
+
+.img-popup__title {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    margin-top:10px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .img-popup__close-container {
+        margin: 0 0 15px;
+        padding: 0;
+        width: 100%;
+        max-width: 282px;
+    }
+
+    .img-popup__close-btn {
+        right: -32px;
+        top: -35px;
+        width: 30px;
+        height: 30px;
+    }
+}

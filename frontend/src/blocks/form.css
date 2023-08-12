@@ -1,0 +1,19 @@
+.form__input {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    margin-top: 13px;
+    padding: 0 0 13px 0;
+    background-color: transparent;
+    border-width: 0 0 1px 0;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.form__input-error {
+    border-color: #FF0000;
+}
+
+.form__input:focus {
+    outline: none;
+}
+

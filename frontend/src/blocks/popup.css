@@ -1,0 +1,143 @@
+.popup {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.5s, opacity 0.5s linear;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.popup__container {
+    position: relative;
+    margin: 40px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 36px;
+    width: 100%;
+    max-width: 358px;
+}
+
+.popup__close-btn {
+    position: absolute;
+    right: -45px;
+    top: -45px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../images/popup/close_icon.svg);
+    cursor: pointer;
+    transition: opacity linear 0.3s;
+    border: none;
+}
+
+.popup__close-btn:hover {
+    opacity: 0.6;
+}
+
+.popup__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup__title {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29px;
+    text-align: left;
+    color: black;
+    margin: 0 0 41px;
+}
+
+
+.popup__field-submit {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 2px;
+    padding: 15px 150px 15px;
+    margin-top: 31px;
+    transition: opacity linear 0.3s;
+    cursor: pointer;
+    border: none;
+}
+
+.popup__field-submit_inactive{
+    color: #000000;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    pointer-events: none;
+    opacity: 20%;
+}
+
+.popup__field-submit:hover {
+    opacity: 0.8;
+}
+
+.popup_opened {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup__input-error{
+    opacity: 0;
+    color: #FF0000;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 5px;
+}
+
+.popup__input-error_active{
+    opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .popup__container {
+        padding: 25px 22px;
+        max-width: 238px;
+        margin: 0;
+    }
+
+    .popup__field-submit {
+        padding: 14px 100px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .popup__close-container {
+        margin: 0 0 15px;
+        padding: 0;
+        width: 100%;
+        max-width: 282px;
+    }
+
+    .popup__close-btn {
+        right: 0;
+        top: -39px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .popup__close-btn_center {
+        left: 47%;
+        top: -50px;
+        width: 26px;
+        height: 26px;
+    }
+
+}

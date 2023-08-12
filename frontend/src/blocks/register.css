@@ -1,0 +1,99 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    margin-bottom: 80px;
+}
+
+.register__form {
+    width: 358px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register__title {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: normal;
+    margin-bottom: 50px;
+}
+
+.register__form-input {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    margin-top: 13px;
+    padding: 0 0 13px 0;
+    background-color: transparent;
+    border-width: 0 0 2px 0;
+    border-color: rgba(204, 204, 204, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.register__form-input::placeholder {
+    color: rgba(204, 204, 204, 1);
+}
+
+.register__form-input {
+    outline: none;
+}
+
+.register__form-submit {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 1);
+    background: rgba(255, 255, 255, 1);
+    border-radius: 2px;
+    padding: 14px 84px 14px;
+    transition: opacity linear 0.3s;
+    cursor: pointer;
+    border: none;
+    margin-top:100%;
+    transition: opacity linear 0.3s;
+}
+
+.register__form-submit:hover{
+    opacity: 0.8;
+}
+
+.register__signup-link {
+    margin-top:15px;
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+@media screen and (max-width: 580px) {
+    .register {
+        margin: 40px 30px 42px;
+    }
+
+    .register__form {
+        max-width: 260px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .register__title {
+        font-size: 20px;
+        font-weight: 900;
+        line-height: normal;
+        margin-bottom: 40px;
+    }
+
+    .register__form-submit {
+        font-size: 16px;
+        padding: 14px 35px;
+    }
+
+    .register__signup-link {
+        margin-top:20px;
+        font-size: 12px;
+    }
+}
