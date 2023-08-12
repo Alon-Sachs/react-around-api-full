@@ -15,6 +15,7 @@ const { login } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
+const cors = require('cors');
 
 const validateEmail = (value, helpers) => {
   if (validator.isEmail(value)) {
@@ -51,6 +52,11 @@ app.get('/crash-test', () => {
     throw new Error('Server will crash now');
   }, 0);
 });
+
+app.use(cors({
+  allowedOrigins: ['https://alonsachs.mooo.com', 'https://www.alonsachs.mooo.com']
+}));
+app.options('*', cors());
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
