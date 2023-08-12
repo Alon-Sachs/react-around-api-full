@@ -128,6 +128,7 @@ function App() {
     }
 
     function handleRegister(email, password) {
+        console.log(email + password);
         auth.register(email, password)
             .then((res) => {
                 setTooltipType(true);
