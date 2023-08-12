@@ -59,8 +59,8 @@ app.get('/crash-test', () => {
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().min(2).max(30),
-    password: Joi.string().min(2).max(30).custom(validateEmail),}),
+    email: Joi.string().min(2).max(30).custom(validateEmail),
+    password: Joi.string().min(2).max(30),}),
 }), login);
 
 app.post('/signup', celebrate({
