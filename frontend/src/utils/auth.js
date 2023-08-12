@@ -1,4 +1,4 @@
-export const BASE_URL = "https://register.nomoreparties.co";
+export const BASE_URL = "https://api.alonsachs.mooo.com";
 
 function checkResponse(res) {
     if (res.ok) {
