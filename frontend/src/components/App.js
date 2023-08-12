@@ -182,20 +182,24 @@ function App() {
     const [jwt, setJwt] = React.useState("");
 
     React.useEffect(() => {
-        api.getUserInformation()
-            .then((res) => {
-                setCurrentUser(res);
-            })
-            .catch(err => console.log(err));
-    }, [])
+        if (isLoggedIn) {
+            api.getUserInformation()
+                .then((res) => {
+                    setCurrentUser(res);
+                })
+                .catch(err => console.log(err));
+        }
+    }, [isLoggedIn])
 
     React.useEffect(() => {
+        if (isLoggedIn) {
         api.getInitialCards()
             .then((res) => {
                 setCards(res);
             })
             .catch(err => console.log(err));
-    }, [])
+        }
+    }, [isLoggedIn])
 
     React.useEffect(() => {
         const token = localStorage.getItem('jwt');
