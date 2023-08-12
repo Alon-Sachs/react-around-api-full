@@ -33,6 +33,11 @@ module.exports.getSelf = (req, res) => {
 
 module.exports.createUser = (req, res) => {
   const { name, about, avatar, email, password } = req.body;
+  console.log("Name:", name);
+console.log("About:", about);
+console.log("Avatar:", avatar);
+console.log("Email:", email);
+console.log("Password:", password);
   bcrypt.hash(password, 10)
     .then(hash => {
       User.create({ name, about, avatar, email, password: hash, })
