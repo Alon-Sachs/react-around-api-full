@@ -53,9 +53,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(cors({
-  allowedOrigins: ['https://alonsachs.mooo.com', 'https://www.alonsachs.mooo.com']
-}));
+app.use(cors());
 app.options('*', cors());
 
 app.post('/signin', celebrate({
