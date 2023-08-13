@@ -92,7 +92,7 @@ class Api {
     }
 
     addJwtToHeaders(jwt) {
-        this.headers.authorization = jwt;
+        this.headers.authorization = `Bearer ${jwt}`;
     }
 }
 
