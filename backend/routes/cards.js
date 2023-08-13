@@ -22,19 +22,19 @@ cards.post('/', celebrate({
 }), createCard);
 
 cards.delete('/:cardId', celebrate({
-  query: Joi.object().keys({
+  params: Joi.object().keys({
     cardId: Joi.string().required().alphanum()
   }),
 }), deleteCard);
 
 cards.put('/:cardId/likes', celebrate({
-  query: Joi.object().keys({
+  params: Joi.object().keys({
     cardId: Joi.string().required().alphanum()
   }),
 }), likeCard);
 
 cards.delete('/:cardId/likes', celebrate({
-  query: Joi.object().keys({
+  params: Joi.object().keys({
     cardId: Joi.string().required().alphanum()
   }),
 }), dislikeCard);

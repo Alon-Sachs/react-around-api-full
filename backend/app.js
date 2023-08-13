@@ -70,7 +70,7 @@ app.post('/signup', celebrate({
   }),
 }), createUser);
 
-// app.use(auth);
+app.use(auth);
 
 app.use('/cards', cards);
 app.use('/users', users);

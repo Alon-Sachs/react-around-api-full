@@ -15,7 +15,7 @@ const validateURL = (value, helpers) => {
 users.get('/', getAllUsers);
 
 users.get('/:userId', celebrate({
-  query: Joi.object().keys({
+  params: Joi.object().keys({
     userId: Joi.string().required().alphanum()
   }),
 }), getUser);
