@@ -92,7 +92,7 @@ class Api {
     }
 
     addJwtToHeaders(jwt) {
-        this.headers.token = jwt;
+        this.headers.authorization = jwt;
     }
 }
 

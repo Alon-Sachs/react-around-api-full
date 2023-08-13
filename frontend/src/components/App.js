@@ -118,9 +118,11 @@ function App() {
     function handleLogin(email, password) {
         auth.login(email, password)
             .then((res) => {
-                setUserEmail(email);
                 localStorage.setItem('jwt', res.token);
                 setLoggedIn(true);
+                setUserEmail(email);
+                setJwt(res.token);
+                api.addJwtToHeaders(res.token);
             })
             .catch(err => {
                 console.log(err);
@@ -128,7 +130,6 @@ function App() {
     }
 
     function handleRegister(email, password) {
-        console.log(email + password);
         auth.register(email, password)
             .then((res) => {
                 setTooltipType(true);
@@ -194,11 +195,11 @@ function App() {
 
     React.useEffect(() => {
         if (isLoggedIn) {
-        api.getInitialCards()
-            .then((res) => {
-                setCards(res);
-            })
-            .catch(err => console.log(err));
+            api.getInitialCards()
+                .then((res) => {
+                    setCards(res);
+                })
+                .catch(err => console.log(err));
         }
     }, [isLoggedIn])
 
@@ -214,7 +215,7 @@ function App() {
                 })
                 .catch(err => console.log(err));
         }
-    }, [jwt])
+    },)
 
     return (
         <div className="page" ref={page}>
