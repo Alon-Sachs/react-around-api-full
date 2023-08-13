@@ -35,7 +35,7 @@ module.exports.createUser = (req, res) => {
   const { name, about, avatar, email, password } = req.body;
   bcrypt.hash(password, 10)
     .then(hash => {
-      return User.create({ name, about, avatar, email, password: hash }); // Return the promise
+      return User.create({ name, about, avatar, email, password: hash });
     })
     .then((user) => {
       res.send({ data: user });
@@ -44,7 +44,7 @@ module.exports.createUser = (req, res) => {
       if (error.name === 'ValidationError') {
         next(new BadRequestError('Validation Error'));
       } else {
-        next(error); // Forward other errors to the error handling middleware
+        next(error);
       }
     });
 };
