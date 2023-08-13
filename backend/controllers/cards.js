@@ -23,7 +23,7 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
-  Card.isSelfCard(req.user._id, cardId) // Use req.user._id
+  Card.isSelfCard(req.user._id, cardId)
     .then(() => {
       return Card.findByIdAndDelete(cardId);
     })

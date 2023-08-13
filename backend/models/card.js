@@ -37,9 +37,10 @@ cardSchema.statics.isSelfCard = function isSelfCard(userId, cardId) {
       if (!card) {
         return Promise.reject(new Error('Incorrect Card Id'));
       }
-      if (card._id !== userId) {
+      if (card.owner.toString() !== userId) {
         return Promise.reject(new Error(`You can't delete someone elses card`));
       }
+      return Promise.resolve();
     });
 };
 
