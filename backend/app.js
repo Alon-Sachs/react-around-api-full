@@ -56,7 +56,6 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().min(2).max(30).custom(validateEmail),

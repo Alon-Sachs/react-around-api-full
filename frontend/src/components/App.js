@@ -61,8 +61,7 @@ function App() {
     function handleUpdateUser({ name, about }) {
         function makeRequest() {
             return api.editUserInformation({ name, about }).then((res) => {
-                console.log(res);
-                setCurrentUser(res);
+                setCurrentUser(res.data);
             });
         }
         handleSubmit(makeRequest);
@@ -70,7 +69,7 @@ function App() {
 
     function handleUpdateAvatar({ avatar }) {
         function makeRequest() {
-            return api.editProfilePicture({ avatar }).then((res) => setCurrentUser(res));
+            return api.editProfilePicture({ avatar }).then((res) => setCurrentUser(res.data));
         }
         handleSubmit(makeRequest);
     }
@@ -187,7 +186,7 @@ function App() {
         if (isLoggedIn) {
             api.getUserInformation()
                 .then((res) => {
-                    setCurrentUser(res);
+                    setCurrentUser(res.data);
                 })
                 .catch(err => console.log(err));
         }
@@ -197,7 +196,7 @@ function App() {
         if (isLoggedIn) {
             api.getInitialCards()
                 .then((res) => {
-                    setCards(res);
+                    setCards(res.data);
                 })
                 .catch(err => console.log(err));
         }
@@ -208,10 +207,10 @@ function App() {
         if (token) {
             auth.checkToken(token)
                 .then((res) => {
+                    api.addJwtToHeaders(token);
                     setLoggedIn(true);
                     setUserEmail(res.data.email);
                     setJwt(token);
-                    api.addJwtToHeaders(jwt);
                 })
                 .catch(err => console.log(err));
         }

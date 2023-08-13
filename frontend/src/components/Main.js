@@ -27,21 +27,19 @@ export default function Main(props) {
                 <button className="profile__add-btn" type="button" onClick={props.onAddPlaceClick}></button>
             </section>
             <section className="cards">
-                {props.cards.map(card => {
-                    return (
-                        <Card
-                            name={card.name}
-                            link={card.link}
-                            likes={card.likes}
-                            onCardClick={props.onCardClick}
-                            key={card._id}
-                            owner={card.owner._id}
-                            onCardLike={props.onCardLike}
-                            card={card}
-                            onCardDelete={props.onCardDelete}
-                        />
-                    );
-                })}
+                {props.cards.length > 0 && props.cards.map(card => (
+                    <Card
+                        name={card.name}
+                        link={card.link}
+                        likes={card.likes}
+                        onCardClick={props.onCardClick}
+                        key={card._id}
+                        owner={card.owner._id}
+                        onCardLike={props.onCardLike}
+                        card={card}
+                        onCardDelete={props.onCardDelete}
+                    />
+                ))}
             </section>
         </main>
     )

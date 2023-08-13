@@ -11,11 +11,14 @@ module.exports.getAllCards = (req, res, next) => {
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
-    .orFail(() => {
-      throw new BadRequestError('Validation Error');
-    })
     .then((card) => res.send({ data: card }))
-    .catch(next);
+    .catch((error) => {
+      if (error.name === 'ValidationError') {
+        next(new BadRequestError('Validation Error'));
+      } else {
+        next(error);
+      }
+    });
 };
 
 module.exports.deleteCard = (req, res, next) => {
