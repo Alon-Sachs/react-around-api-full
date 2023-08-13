@@ -12,8 +12,6 @@ const validateURL = (value, helpers) => {
   return helpers.error('string.uri');
 }
 
-users.get('/', getAllUsers);
-
 users.get('/me', getSelf);
 
 users.patch('/me', celebrate({
