@@ -33,20 +33,21 @@ module.exports.getSelf = (req, res) => {
 
 module.exports.createUser = (req, res) => {
   const { name, about, avatar, email, password } = req.body;
-  console.log("Name:", name);
-console.log("About:", about);
-console.log("Avatar:", avatar);
-console.log("Email:", email);
-console.log("Password:", password);
   bcrypt.hash(password, 10)
     .then(hash => {
-      User.create({ name, about, avatar, email, password: hash, })
+      return User.create({ name, about, avatar, email, password: hash }); // Return the promise
     })
-    .orFail(() => {
-      throw new BadRequestError('Validation Error');
+    .then((user) => {
+      console.log("good");
+      res.send({ data: user });
     })
-    .then((user) => res.send({ data: user }))
-    .catch(next)
+    .catch(error => {
+      if (error.name === 'ValidationError') {
+        next(new BadRequestError('Validation Error'));
+      } else {
+        next(error); // Forward other errors to the error handling middleware
+      }
+    });
 };
 
 module.exports.updateUserProfile = (req, res) => {
@@ -71,16 +72,15 @@ module.exports.updateUserAvatar = (req, res) => {
     .catch(next);
 };
 
-module.exports.login = (req, res) => {
+module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
-  return User.findUserByCredentials(email, password)
+  User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET,
-        { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
       res.send({ token });
     })
-    .catch(() => {
+    .catch((error) => {
       next(new AuthorizationError('Validation Error'));
     });
 };
