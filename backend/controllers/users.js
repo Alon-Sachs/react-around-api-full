@@ -5,13 +5,13 @@ const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
 const AuthorizationError = require('../errors/authorization-error');
 
-module.exports.getAllUsers = (req, res) => {
+module.exports.getAllUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send({ data: users }))
     .catch(next);
 };
 
-module.exports.getUser = (req, res) => {
+module.exports.getUser = (req, res, next) => {
   const { userId } = req.params;
   User.findById(userId)
     .orFail(() => {
@@ -21,8 +21,9 @@ module.exports.getUser = (req, res) => {
     .catch(next);
 };
 
-module.exports.getSelf = (req, res) => {
-  const userId = req.user._id;
+module.exports.getSelf = (req, res, next) => {
+  const userId = req.headers.id;
+  console.log(userId);
   User.findById(userId)
     .orFail(() => {
       throw new NotFoundError('There is no user with the requested id');
@@ -31,7 +32,7 @@ module.exports.getSelf = (req, res) => {
     .catch(next);
 };
 
-module.exports.createUser = (req, res) => {
+module.exports.createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
   bcrypt.hash(password, 10)
     .then(hash => {
@@ -49,7 +50,7 @@ module.exports.createUser = (req, res) => {
     });
 };
 
-module.exports.updateUserProfile = (req, res) => {
+module.exports.updateUserProfile = (req, res, next) => {
   const { name, about } = req.body;
   const id = req.user._id;
   User.findByIdAndUpdate(id, { name, about }, { new: true, runValidators: true })
@@ -60,7 +61,7 @@ module.exports.updateUserProfile = (req, res) => {
     .catch(next);
 };
 
-module.exports.updateUserAvatar = (req, res) => {
+module.exports.updateUserAvatar = (req, res, next) => {
   const { avatar } = req.body;
   const id = req.user._id;
   User.findByIdAndUpdate(id, { avatar }, { new: true, runValidators: true })

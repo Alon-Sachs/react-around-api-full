@@ -8,7 +8,7 @@ module.exports.getAllCards = (req, res) => {
     .catch(next);
 };
 
-module.exports.createCard = (req, res) => {
+module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .orFail(() => {
@@ -18,7 +18,7 @@ module.exports.createCard = (req, res) => {
     .catch(next);
 };
 
-module.exports.deleteCard = (req, res) => {
+module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
   Card.isSelfCard(res.user._id, cardId)
     .then((res) => {
@@ -31,7 +31,7 @@ module.exports.deleteCard = (req, res) => {
     .catch(next);
 };
 
-module.exports.likeCard = (req, res) => {
+module.exports.likeCard = (req, res, next) => {
   const { cardId } = req.params;
   Card.isSelfCard(res.user._id, cardId)
     .then((res) => {
@@ -48,7 +48,7 @@ module.exports.likeCard = (req, res) => {
     .catch(next);
 };
 
-module.exports.dislikeCard = (req, res) => {
+module.exports.dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
   Card.isSelfCard(res.user._id, cardId)
     .then((res) => {

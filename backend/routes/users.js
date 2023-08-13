@@ -14,12 +14,6 @@ const validateURL = (value, helpers) => {
 
 users.get('/', getAllUsers);
 
-users.get('/:userId', celebrate({
-  params: Joi.object().keys({
-    userId: Joi.string().required().alphanum()
-  }),
-}), getUser);
-
 users.get('/me', getSelf);
 
 users.patch('/me', celebrate({
@@ -34,5 +28,11 @@ users.patch('/me/avatar', celebrate({
     avatar: Joi.string().required().custom(validateURL)
   }),
 }), updateUserAvatar);
+
+users.get('/:userId', celebrate({
+  params: Joi.object().keys({
+    userId: Joi.string().required().alphanum()
+  }),
+}), getUser);
 
 module.exports = users;
