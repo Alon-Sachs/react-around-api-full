@@ -76,7 +76,7 @@ function App() {
 
     function handleAddPlaceSubmit({ name, link }) {
         function makeRequest() {
-            return api.addNewCard({ name, link }).then((res) => setCards([res, ...cards]));
+            return api.addNewCard({ name, link }).then((res) => setCards([res.data, ...cards]));
         }
         handleSubmit(makeRequest);
     }

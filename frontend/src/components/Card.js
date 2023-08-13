@@ -5,7 +5,6 @@ export default function Card(props) {
 
     const currentUser = React.useContext(CurrentUserContext);
 
-    const cardClassName = "card";
     const isOwn = props.owner === currentUser._id;
     const cardDeleteButtonClassName = `card__icon-bin ${isOwn ? 'card__icon-bin_visible' : 'card__icon-bin_hidden'}`;
 

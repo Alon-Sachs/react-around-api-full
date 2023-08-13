@@ -34,7 +34,7 @@ export default function Main(props) {
                         likes={card.likes}
                         onCardClick={props.onCardClick}
                         key={card._id}
-                        owner={card.owner._id}
+                        owner={card.owner}
                         onCardLike={props.onCardLike}
                         card={card}
                         onCardDelete={props.onCardDelete}

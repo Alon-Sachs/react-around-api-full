@@ -23,14 +23,16 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
-  Card.isSelfCard(res.user._id, cardId)
-    .then((res) => {
-      return Card.findByIdAndDelete(cardId)
+  Card.isSelfCard(req.user._id, cardId) // Use req.user._id
+    .then(() => {
+      return Card.findByIdAndDelete(cardId);
     })
-    .orFail(() => {
-      throw new NotFoundError('There is no card with the requested id');
+    .then((card) => {
+      if (!card) {
+        throw new NotFoundError('There is no card with the requested id');
+      }
+      res.send({ data: card });
     })
-    .then((card) => res.send({ data: card }))
     .catch(next);
 };
 
