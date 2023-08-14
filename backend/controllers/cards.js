@@ -38,34 +38,32 @@ module.exports.deleteCard = (req, res, next) => {
 
 module.exports.likeCard = (req, res, next) => {
   const { cardId } = req.params;
-  Card.isSelfCard(res.user._id, cardId)
-    .then((res) => {
-      Card.findByIdAndUpdate(
-        cardId,
-        { $addToSet: { likes: req.user._id } },
-        { new: true },
-      )
+  Card.findByIdAndUpdate(
+    cardId,
+    { $addToSet: { likes: req.user._id } },
+    { new: true }
+  )
+    .then((card) => {
+      if (!card) {
+        throw new NotFoundError('There is no card with the requested id');
+      }
+      res.send({ data: card });
     })
-    .orFail(() => {
-      throw new NotFoundError('There is no card with the requested id');
-    })
-    .then((card) => res.send({ data: card }))
     .catch(next);
 };
 
 module.exports.dislikeCard = (req, res, next) => {
   const { cardId } = req.params;
-  Card.isSelfCard(res.user._id, cardId)
-    .then((res) => {
-      Card.findByIdAndUpdate(
-        cardId,
-        { $pull: { likes: req.user._id } },
-        { new: true },
-      )
+  Card.findByIdAndUpdate(
+    cardId,
+    { $pull: { likes: req.user._id } },
+    { new: true }
+  )
+    .then((card) => {
+      if (!card) {
+        throw new NotFoundError('There is no card with the requested id');
+      }
+      res.send({ data: card });
     })
-    .orFail(() => {
-      throw new NotFoundError('There is no card with the requested id');
-    })
-    .then((card) => res.send({ data: card }))
     .catch(next);
-}
+};
