@@ -24,9 +24,7 @@ module.exports.createCard = (req, res, next) => {
 module.exports.deleteCard = (req, res, next) => {
   const { cardId } = req.params;
   Card.isSelfCard(req.user._id, cardId)
-    .then(() => {
-      return Card.findByIdAndDelete(cardId);
-    })
+    .then(() => Card.findByIdAndDelete(cardId))
     .then((card) => {
       if (!card) {
         throw new NotFoundError('There is no card with the requested id');
@@ -41,7 +39,7 @@ module.exports.likeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     cardId,
     { $addToSet: { likes: req.user._id } },
-    { new: true }
+    { new: true },
   )
     .then((card) => {
       if (!card) {
@@ -57,7 +55,7 @@ module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     cardId,
     { $pull: { likes: req.user._id } },
-    { new: true }
+    { new: true },
   )
     .then((card) => {
       if (!card) {

@@ -1,16 +1,16 @@
 const users = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-const {
-  getAllUsers, getUser, updateUserProfile, updateUserAvatar, getSelf
-} = require('../controllers/users');
 const validator = require('validator');
+const {
+  getUser, updateUserProfile, updateUserAvatar, getSelf,
+} = require('../controllers/users');
 
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {
     return value;
   }
   return helpers.error('string.uri');
-}
+};
 
 users.get('/me', getSelf);
 
@@ -23,13 +23,13 @@ users.patch('/me', celebrate({
 
 users.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().required().custom(validateURL)
+    avatar: Joi.string().required().custom(validateURL),
   }),
 }), updateUserAvatar);
 
 users.get('/:userId', celebrate({
   params: Joi.object().keys({
-    userId: Joi.string().required().alphanum()
+    userId: Joi.string().required().alphanum(),
   }),
 }), getUser);
 

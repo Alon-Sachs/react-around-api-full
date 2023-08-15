@@ -4,26 +4,24 @@ const mongoose = require('mongoose');
 const process = require('process');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const { celebrate, Joi, errors } = require('celebrate');
+const validator = require('validator');
+const cors = require('cors');
 const cards = require('./routes/cards');
 const users = require('./routes/users');
 const auth = require('./middlewares/auth');
-const { errors } = require('celebrate');
 const errorHandler = require('./middlewares/errorHandler');
-const { NOT_FOUND } = require('./utils/constants');
 const { createUser } = require('./controllers/users');
 const { login } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { celebrate, Joi } = require('celebrate');
-const validator = require('validator');
-const cors = require('cors');
+const NotFoundError = require('./errors/not-found-error');
 
 const validateEmail = (value, helpers) => {
   if (validator.isEmail(value)) {
     return value;
   }
   return helpers.error('string.email');
-}
-
+};
 
 process.on('uncaughtException', (err, origin) => {
   console.log(`${origin} ${err.name} with the message ${err.message} was not handled. Pay attention to it!`);
@@ -59,7 +57,8 @@ app.get('/crash-test', () => {
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().min(2).max(30).custom(validateEmail),
-    password: Joi.string().min(2).max(30),}),
+    password: Joi.string().min(2).max(30),
+  }),
 }), login);
 
 app.post('/signup', celebrate({
@@ -74,8 +73,8 @@ app.use(auth);
 app.use('/cards', cards);
 app.use('/users', users);
 
-app.use((req, res) => {
-  res.status(NOT_FOUND).send({ message: 'Requested resource not found' });
+app.use((req, res, next) => {
+  next(new NotFoundError('Requested resource not found'));
 });
 
 app.use(errorLogger);

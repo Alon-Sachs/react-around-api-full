@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const OtherUserError = require('../errors/other-user-error');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -38,7 +39,7 @@ cardSchema.statics.isSelfCard = function isSelfCard(userId, cardId) {
         return Promise.reject(new Error('Incorrect Card Id'));
       }
       if (card.owner.toString() !== userId) {
-        return Promise.reject(new Error(`You can't delete someone elses card`));
+        return Promise.reject(new OtherUserError('You can\'t delete someone elses card'));
       }
       return Promise.resolve();
     });

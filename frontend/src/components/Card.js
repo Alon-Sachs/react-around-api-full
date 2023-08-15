@@ -8,7 +8,7 @@ export default function Card(props) {
     const isOwn = props.owner === currentUser._id;
     const cardDeleteButtonClassName = `card__icon-bin ${isOwn ? 'card__icon-bin_visible' : 'card__icon-bin_hidden'}`;
 
-    const isLiked = props.likes.some(user => user._id === currentUser._id);
+    const isLiked = props.likes.some(user => user === currentUser._id);
     const cardLikeButtonClassName = `card__icon ${isLiked ? 'card__icon_active' : ''}`;
     function handleClick() {
         props.onCardClick(props.name, props.link);

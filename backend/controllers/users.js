@@ -1,9 +1,10 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
 const AuthorizationError = require('../errors/authorization-error');
+const ExistingEmailError = require('../errors/existing-email-error');
 
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
@@ -32,17 +33,21 @@ module.exports.getSelf = (req, res, next) => {
 };
 
 module.exports.createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
   bcrypt.hash(password, 10)
-    .then(hash => {
-      return User.create({ name, about, avatar, email, password: hash });
-    })
+    .then((hash) => User.create({
+      name, about, avatar, email, password: hash,
+    }))
     .then((user) => {
       res.send({ data: user });
     })
-    .catch(error => {
+    .catch((error) => {
       if (error.name === 'ValidationError') {
         next(new BadRequestError('Validation Error'));
+      } else if (error.code === 11000) {
+        next(new ExistingEmailError('Email already exists'));
       } else {
         next(error);
       }
@@ -78,7 +83,7 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
       res.send({ token });
     })
-    .catch((error) => {
+    .catch(() => {
       next(new AuthorizationError('Validation Error'));
     });
 };
