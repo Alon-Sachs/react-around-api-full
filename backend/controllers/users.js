@@ -6,6 +6,8 @@ const BadRequestError = require('../errors/bad-request-error');
 const AuthorizationError = require('../errors/authorization-error');
 const ExistingEmailError = require('../errors/existing-email-error');
 
+const { JWT_SECRET = 'dev-key' } = process.env;
+
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send({ data: users }))
@@ -40,8 +42,12 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) => User.create({
       name, about, avatar, email, password: hash,
     }))
-    .then((user) => {
-      res.send({ data: user });
+    .then(() => {
+      res.send({
+        data: {
+          name, about, avatar, email,
+        },
+      });
     })
     .catch((error) => {
       if (error.name === 'ValidationError') {
@@ -80,7 +86,7 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
       res.send({ token });
     })
     .catch(() => {
